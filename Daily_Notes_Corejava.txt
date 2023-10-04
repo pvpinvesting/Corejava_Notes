@@ -342,8 +342,8 @@ Unreachable block:
 		try {
 			// Code 
 		}catch(Exception e) {
-			// 
+		//
 		}catch(NullPointerException e) {
-			// Unreachable block.
+			// Unreachable block. 
 		}
 	
