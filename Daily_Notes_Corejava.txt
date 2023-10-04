@@ -1,0 +1,349 @@
+***************
+26-Sept-2023
+***************
+In Java there are 2 types of modifiers:
+	Non-Access Modifiers:
+		static, final, abstract, synchronized, native, volatile,transient
+		& strictfp - not used now.
+	Access Modifiers:
+	
+Public: 
+			The access level of a public modifier is everywhere. It can be accessed from within the class, outside the class, within the package and outside the package.
+			Which uses for variables, methods, constructor, class & interface etc.
+Protected: 
+			The access level of a protected modifier is within the package and outside the package through child class. If you do not make the child class, it cannot be accessed from outside the package.
+			Which uses for variables, methods and constructor.
+			
+Default: 
+			The access level of a default modifier is only within the package. It cannot be accessed from outside the package. If you do not specify any access level, it will be the default.
+			
+			Which uses for variables, methods & class etc.
+Private: 
+			The access level of a private modifier is only within the class. It cannot be accessed from outside the class.
+			Which uses for variables, methods and constructor.
+			
+
+Note: 
+		Access specifiers can't applicable to local variables.
+		We can't mention a class as a private or protected, if it is an outer class.
+		
+Can we mention a class as private?
+	We can mention a class as private if it is inner class.
+	
+	
+
+Static : Static variables are shared by all the objects.
+		 static variables can be called with class name.
+		 can be called with object reference but avoid it.
+		 
+		 If we want to call non-static methods then require object of the class.
+		 
+
+Access Modifiers in Java are used to control the visibility of fields, methods, classes and constructors.
+
+Native Keyword in Java:
+
+	The native keyword in Java is applied to a method to indicate that the method is implemented in native code using JNI (Java Native Interface). The native keyword is a modifier that is applicable only for methods, and we can’t apply it anywhere else. The methods which are implemented in C, C++ are called native methods or foreign methods.
+
+Volatile Keyword in Java:
+
+	Volatile keyword is used to modify the value of a variable by different threads. It is also used to make classes thread safe. It means that multiple threads can use a method and instance of the classes at the same time without any problem. The volatile keyword can be used either with primitive type or objects.
+
+	The volatile keyword does not cache the value of the variable and always read the variable from the main memory.	
+
+Example
+	
+	class Test{  
+		static int var=5;  
+	}  
+	
+	In the above example, assume that two threads are working on the same class. Both threads run on different processors where each thread has its local copy of var. If any thread modifies its value, the change will not reflect in the original one in the main memory. It leads to data inconsistency because the other thread is not aware of the modified value.
+	
+	class Test{  
+		static volatile int var =5;  
+	}  
+
+	In the above example, static variables are class members that are shared among all objects. There is only one copy in the main memory. The value of a volatile variable will never be stored in the cache. All read and write will be done from and to the main memory.
+
+Java Strictfp Keyword:
+	Java strictfp keyword ensures that you will get the same result on every platform if you perform operations in the floating-point variable.
+		 
+		 
+
+27-September-2023
+
+***************
+static keyword:
+***************
+
+The static keyword in Java is mainly used for memory management.It is a non-access modifier in Java that can apply with variables, methods, blocks, and nested classes. 
+Which is used for a constant variable or a method that is the same for every instance of a class.
+
+The static keyword is a non-access modifier in Java that is applicable for the following: 
+
+Variables
+Methods
+Blocks
+Inner Classes
+
+static variables:
+				When a variable is declared as static, then a single copy of the variable is created and shared among all objects at the class level. Static variables are, essentially, global variables. All instances of the class share the same static variable.
+static method:
+				If you apply static keyword with any method, it is known as static method.
+				A static method belongs to the class rather than the object of a class.
+				A static method can be invoked without the need for creating an instance of a class.
+				A static method can access static data member and can change the value of it.
+static block:
+				Is used to initialize the static data member.
+				It is executed before the main method at the time of classloading.
+				
+static Classes: 
+				A class can be made static only if it is a nested class. We cannot declare a top-level class with a static modifier but can declare nested classes as static. Such types of classes are called Nested static classes. Nested static class doesn’t need a reference of Outer class. In this case, a static class cannot access non-static members of the Outer class. 
+
+
+Features of static keyword:
+
+Shared memory allocation: 
+						Static variables and methods are allocated memory space only once during the execution of the program. This memory space is shared among all instances of the class, which makes static members useful for maintaining global state or shared functionality.
+
+Accessible without object instantiation: 
+						Static members can be accessed without the need to create an instance of the class. This makes them useful for providing utility functions and constants that can be used across the entire program.
+
+Associated with class, not objects: 
+						Static members are associated with the class, not with individual objects. This means that changes to a static member are reflected in all instances of the class, and that you can access static members using the class name rather than an object reference.
+
+Cannot access non-static members: 
+						Static methods and variables cannot access non-static members of a class, as they are not associated with any particular instance of the class.
+
+Can be overloaded, but not overridden: 
+						Static methods can be overloaded, which means that you can define multiple methods with the same name but different parameters. However, they cannot be overridden, as they are associated with the class rather than with a particular instance of the class.
+
+https://meet.google.com/rud-wgoh-pxj
+
+How to load a class into memory without creating object.
+	Class.forName("com.grats.st.variable.Company");
+
+
+*********************
+28-Sept-2023:
+*********************
+
+Inner Class in Java:
+		Java inner class or nested class is a class that is declared inside the class or interface. We use inner classes to logically group classes and interfaces in one place to be more readable and maintainable. Additionally, it can access all the members of the outer class, including private data members and methods.
+
+There are two types of nested classes non-static and static nested classes.
+
+Non-static nested class (inner class):
+	Member inner class:
+		
+		Syntax:
+		
+			class Java_Outer_class{  
+			 //code  
+			 class Java_Inner_class{  
+			  //code  
+			 }  
+			}  
+		
+	Local inner class:
+		A class i.e., created inside a method, is called local inner class in java. 
+		
+			class Java_Outer_class{  
+			 //code  
+				void methodA(){
+					class Java_Inner_class{  
+						//code  
+					}	
+				}
+  			} 
+		
+	Anonymous inner class:
+		Java anonymous inner class is an inner class without a name and for which only a single object is created.
+		
+		interface Employee{
+			public abstract void showEmployee();
+		}
+		
+		psvm(String[] args){
+			Employee emp=new Employee(){
+				public void showEmployee(){
+					syso("showEmployee()");
+				}
+			};
+		}
+	
+Static nested class:
+	A static inner class is a nested class which is a static member of the outer class. It can be accessed without instantiating the outer class, using other static members. Just like static members, a static nested class does not have access to the instance variables and methods of the outer class. The syntax of static nested class is as follows −
+
+Syntax:
+	
+	class MyOuter {
+	   static class Nested_Demo {
+	   }
+	}
+
+final Keyword: Notes should take from PPT.
+
+
+*************
+03-Oct-2028:
+*************
+
+
+Exception and Exception Handling:
+
+Types of Erros:
+	1. Compile Time Error
+	2. Runtime Error
+	
+1. Compile Time Error:
+	
+		Any error that occurs at the time of compilation then we call that as a Compile Time Error.
+
+		Compile Time Errors are those errors which prevent the code from running because of following reasons:
+
+			i) It can occur because of wrong syntax.
+			ii) It can occur because the environment required for executing a statement is not existing.
+			iii)It may occur because of the checked exceptions.
+			
+
+2. Logical and Runtime Error:
+	Any error that occurs at the time of execution of the program then we call it a Runtime error.
+
+	=> Runtime errors may occur because of logical errors.
+	=> Any wrong logic which leads to wrong outputs can be called a logical error.
+	=> A Runtime error occurs only because of the logical errors. But every logical error would not lead to a runtime error.
+	=> When JVM enters into the state of ambiguity (i.e., confusion) is known as runtime error.
+	=> A Runtime error leads to an abnormal termination of the program.
+		What is abnormal termination?
+		The concept of termination of the program in the middle of its execution without executing the remaining statements of the program is known as abnormal termination.
+		
+		statement 1;
+		statement 2;
+		statement 3;
+		statement 4;//If any errors occurs then terminate the program here.
+		statement 5;
+		statement 6;
+		
+	=> In order to represent each and every logical error there would be a corresponding exception class.
+	
+		Exception classes: The set of classes which are exclusively designed for representing logical errors are known as exception classes.
+		
+		Exception Hierarchy :
+		
+	What is an Exception?
+	
+		=> An exception is an event that occurs during the execution of a program that disrupts the normal flow of the program's instructions. In Java, exceptions are objects that describe an exceptional (error) condition that has occurred in a piece of code.
+		=> It is an object which is thrown at runtime.
+		=> Exceptions are the objects representing the corresponding logical and runtime errors.
+		=> Any object created by the jvm for representing the corresponding logical or runtime error can be called as an Exception.
+		
+*************
+04-Oct-2023:
+*************
+	=> An exception is a problem that arises during the execution of a program. It can occur for various reasons:
+		-> A user has entered a invalid data.
+		-> If trying to read a file but which is not present then we get the FileNotFoundException.
+		-> A network connection has been lost in the middle of communications.
+		-> The JVM has run out of memory. 
+
+	So if an exception is not handled, it may lead to a system failure. That is why handling an exception is very important.
+
+Exception Hierarchy :
+
+	All exception and error types are subclasses of class Throwable, which is the base class of hierarchy.
+	One branch is headed by Error which occurs at run-time and other by Exception that can happen either at compile time or runtime.
+
+	Exception :
+		All the classes represent simple logical errors.
+
+	Error : 
+		An Error is used by the Java run-time system (JVM) to indicate errors that are associated with the run-time environment (JRE).
+		All the classes represent serious logical errors.
+		xamples for it. VirtualMemoryError, OutOfMemoryError and StackOverflowError
+
+	Difference between Exceptions and Errors:
+		Exceptions:
+			=> Possible to recover from Exceptions.
+			=> Exceptions can be either checked or unchecked exceptions
+			=> Can occur at compile time or run time.
+			=> Caused by the application itself.
+
+		Errors:
+			=> Impossible to recover from an error.
+			=> Errors are of type unchecked.
+			=> Can occur at run time.
+			=> Caused by the application running environment.
+
+
+Exception Handling:
+
+		=> The Exception Handling in Java is one of the powerful mechanisms to handle the runtime errors so that normal flow of the application can be maintained.
+		=> The code which is prone to exceptions is placed in the try block. When an exception occurs, that exception is handled by the catch block associated with it.
+		Every try block should be immediately followed either by a catch block or finally block.
+
+		Syntax:
+			try {
+			  //  Protected  Code
+			} catch (ExceptionName e1) {
+			  // Catch block
+			}
+		
+		or 
+			try {
+			  //  Protected  Code
+			} finally {
+			  // finally block 
+			}
+		
+
+		try:
+			The functionality of the try keyword is only to identify a logical error or an exception and transfer the control along with the exception identified to the catch block by suspending the execution of try block.
+			A try block must follow catch blocks or finally block or both.
+			
+			Nested try block:
+				try block within a try block is known as nested try block in java.
+
+		catch:
+			The functionality of the catch is to receive an exception that is identified by the try and assign that exception object to the reference of the corresponding exception class and handle it.
+			This block must have the try block.
+
+			Multiple Catch Blocks
+			=> A try block can be followed by multiple catch blocks. The syntax for multiple catch blocks looks like the following −
+			try {
+			  // Protected code
+			} catch (ExceptionType1 e1) {
+			  // Catch block
+			} catch (ExceptionType2 e2) {
+			  // Catch block
+			} catch (ExceptionType3 e3) {
+			  // Catch block
+			}
+		
+		finally:
+			A finally block contains all the crucial statements that must be executed whether an exception occurs or not. The statements present in this block will always execute, regardless an exception occurs in the try block or not such as closing a connection, stream etc. 
+
+
+Checked Exception:
+		It is an exception that occurs at compile time, also called compile time exceptions. If some code within a method throws a checked exception, then the method must either handle the exception.
+		All subclasses of Exception class but which are not subclasses of Runtime Exception are Checked Exception classes.
+		Example: ClassNotFoundException, IOException, SQLException ...
+
+Unchecked Exception:
+		It is an exception that occurs at the time of execution. These are called Runtime exceptions.
+		All the subclasses of RuntimeException are unchecked exceptions.
+		Example: ArithmeticException, NullpointerException, NumberFormatException ...
+		
+Unreachable block:
+		The block of statements which are not going to get executed at any given point of time under any case are known as unreachable blocks.
+		Unreachable blocks are not supported by Java.
+		The catch block mentioned with the reference of the Exception class should and must always be the last catch block because Exception is the superclass of all exceptions.
+		
+		try {
+			// Code 
+		}catch(Exception e) {
+			// 
+		}catch(NullPointerException e) {
+			// Unreachable block.
+		}
+	
