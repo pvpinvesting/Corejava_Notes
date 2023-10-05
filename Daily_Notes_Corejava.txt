@@ -256,6 +256,17 @@ Exception Hierarchy :
 
 	Exception :
 		All the classes represent simple logical errors.
+		
+		We have 2 types of Exceptions under Exception
+			1. Checked Exception:
+				It is an exception that occurs at compile time, also called compile time exceptions. If some code within a method throws a checked exception, then the method must either handle the exception.
+				All subclasses of Exception class but which are not subclasses of Runtime Exception are Checked Exception classes.
+				Example: ClassNotFoundException, IOException, SQLException ...
+
+			2. Unchecked Exception:
+				It is an exception that occurs at the time of execution. These are called Runtime exceptions.
+				All the subclasses of RuntimeException are unchecked exceptions.
+				Example: ArithmeticException, NullpointerException, NumberFormatException ...
 
 	Error : 
 		An Error is used by the Java run-time system (JVM) to indicate errors that are associated with the run-time environment (JRE).
@@ -274,6 +285,7 @@ Exception Hierarchy :
 			=> Errors are of type unchecked.
 			=> Can occur at run time.
 			=> Caused by the application running environment.
+
 
 
 Exception Handling:
@@ -320,20 +332,17 @@ Exception Handling:
 			  // Catch block
 			}
 		
-		finally:
+finally:
 			A finally block contains all the crucial statements that must be executed whether an exception occurs or not. The statements present in this block will always execute, regardless an exception occurs in the try block or not such as closing a connection, stream etc. 
+			
 
-
-Checked Exception:
-		It is an exception that occurs at compile time, also called compile time exceptions. If some code within a method throws a checked exception, then the method must either handle the exception.
-		All subclasses of Exception class but which are not subclasses of Runtime Exception are Checked Exception classes.
-		Example: ClassNotFoundException, IOException, SQLException ...
-
-Unchecked Exception:
-		It is an exception that occurs at the time of execution. These are called Runtime exceptions.
-		All the subclasses of RuntimeException are unchecked exceptions.
-		Example: ArithmeticException, NullpointerException, NumberFormatException ...
-		
+System.exit(0):			
+			System. exit(0) method terminates JVM which results in termination of the currently running program too. Status is the single parameter that the method takes. If the status is 0, it indicates the termination is successful. If exit(1) or exit(-1) or any non-zero value – indicates unsuccessful termination.
+			
+			the finally block will be executed even after a return statement in a method. If we call the System. exit() method explicitly in the finally block then only it will not be executed.
+			
+			There are few situations where the finally will not be executed like JVM crash, power failure, software crash and etc. Other than these conditions, the finally block will be always executed.
+			
 Unreachable block:
 		The block of statements which are not going to get executed at any given point of time under any case are known as unreachable blocks.
 		Unreachable blocks are not supported by Java.
@@ -342,8 +351,76 @@ Unreachable block:
 		try {
 			// Code 
 		}catch(Exception e) {
-		//
+		// exception handling.
 		}catch(NullPointerException e) {
 			// Unreachable block. 
 		}
+
+User-Defined Exception:
+	Sometimes, the built in exceptions in Java are not able to describe a certain situation. In such cases, a user also can create exceptions which are called User-Defined exceptions.
 	
+	=> A user-defined exception must extend the Exception or RuntimeException class.
+	=> The exception is thrown using the throw keyword.
+	
+	Syntax for user defined exception:
+		public class MyException extends Exception{
+			public MyException(String errMsg){
+				super(errMsg);
+			}
+		}
+
+	Syntax for throw an exception explicitly:
+	
+			throw new MyException("User-defined exception raised");
+
+
+Difference between final, finally and finalize:
+
+	Definition:	
+				final: 	final is a keyword and access modifier that is used to restrict access to a class, method, or variable.
+				finally: finally, block in Java Exception Handling executes the critical function whether or not the exception occurs
+				finalize():	In Java, the finalize method is used to do cleanup procedures immediately before an object is garbage collected.
+	
+	Applicable to: 
+				final: With classes, methods, and variables, the final keyword is utilized.
+				finally:	In exception handling, the finally block is usually associated with the try and catch block.
+				finalize():	The finalize() method is applied to objects.
+				
+	Functionality:
+				final: 	(1) Once declared, the final variable is fixed and cannot be changed.
+						(2) A subclass cannot override the final method.
+						(3) The final class is not inheritable.
+						
+				finally:	
+						(1) The finally block executes the critical code whether or not an exception occurs.
+						(2) The finally block cleans up all of the resources that were used in the try block.
+				finalize():	
+							Before an item is destroyed, cleaning tasks are carried out using the finalize method.
+							
+	Execution:
+				final: Only when we call the final method is it actually used.
+				finally:	After the try-catch block, the finally block is carried out.
+				finalize():	Just before the object is destroyed, the finalize method is called.
+				
+throws:
+		throws is a keyword in Java that is used in the signature of a method to indicate that this method might throw one of the listed type exceptions. The caller to these methods has to handle the exception using a try-catch block. 
+		
+		Syntax:
+				public void method1() throws IOException,SQLException{
+					// code.
+				}
+		
+		=> by using throws keyword can avoid try & catch block.
+		=> throws keyword is required only for checked exceptions and usage of the throws keyword for unchecked exceptions is meaningless.
+		=> With the help of the throws keyword, we can provide information to the caller of the method about the exception.
+		
+	Difference between throw & throws:
+	
+			throw															throws
+	1. Java throw keyword is used to explicitly throw an exception 		1. Java throws keyword is used to declare an exception.
+	2. checked exceptions can't be propagated using throw only.			2. checked exceptions can be propagated with throws.
+	3. throw is followed by instance.									3. throws is followed by class.
+	4. throw is used within the method.								4. throws is used with the method signature.
+	5. We can't throw multiple exceptions.								5. We can declare multiple exceptions with throws in 
+																			method signature.
+																			Ex: public void myMethod() throws IOException,SQLException
