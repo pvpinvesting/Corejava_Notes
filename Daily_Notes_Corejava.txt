@@ -424,3 +424,61 @@ throws:
 	5. We can't throw multiple exceptions.								5. We can declare multiple exceptions with throws in 
 																			method signature.
 																			Ex: public void myMethod() throws IOException,SQLException
+																			
+***************
+06-Oct-2023
+***************
+
+String, StringBuffer & StringBuilder:
+
+	Java provides 3 classes to represent a sequence of characters namely, String, StringBuffer and StringBuilder.
+	It is very important for us as developers to know when to use which class.
+
+
+java.lang.String: It is a sequence of characters. In Java, objects of String are immutable which means a constant and cannot be changed object state once created.
+
+There are 2 ways can create a String object.
+
+1) By string literal:
+	String s1="Grats"; // In this case a new object created in String constant pool and referred with reference s1 variable.
+	
+	String s2="Grats"; // In this case since object with same content already available in String constant pool will return reference to the same instance s1.  
+	
+	Each time a string literal is created, the JVM checks the string literal pool first. If the string already exists in the string pool, a reference to the pooled instance returns. If the string does not exist in the pool, a new String object initializes and is placed in the pool.
+	
+2) By new keyword: 
+	String s3=new String("Grats"); // In this case creates 2 objects one is in Heap memory and another one is in String constant pool. But s3 refers to the heap memory object.
+	
+String class have many useful methods to perform operations on sequence of characters.
+
+	Method Name										Description
+	
+	int length()									Returns the length of this string.
+	String substring(int beginIndex)				Returns a new string that is a substring of this string.
+	String substring(int beginindex,int endindex)	Returns a new string that is a substring of this string.
+	
+	boolean isEmpty()                 				Returns true if, and only if, length() is 0.
+	String concate(String str)                  	Concatenates the specified string to the end of this string.
+	String toLowerCase()                       		Converts all of the characters in this String to lower case
+	String toUpperCase()                  			Converts all of the characters in this String to upper case
+	char charAt(int index)							Returns the char value at the specified index.
+	int compareTo(String s)							Compares two strings lexicographically
+	int compareToIgnoreCase(String s)				Compares two strings lexicographically, ignoring case differences.
+	boolean equals(Object another)                  Compares this string to the specified object.
+	boolean equalsIgnoreCase(String s)				Compares this String to another String, ignoring case considerations.
+	boolean startsWith(String s)					Tests if this string starts with the specified prefix.
+	boolean endsWith(String s)						Tests if this string ends with the specified suffix.
+	int indexOf(String s)							Returns the index within this string of the first occurrence of the specified substring.
+	int lastIndexOf(String s)						Returns the index within this string of the last occurrence of the specified character.
+	String replace(CharSequence target, CharSequence replacement)					
+													Replaces each substring of this string that matches the literal target sequence with the specified literal replacement sequence.
+	String trim()									Returns a copy of the string, with leading and trailing whitespace omitted.
+	String[] split(String regex)					Splits this string around matches of the given regular expression.
+
+
+
+	
+	
+
+	
+	
