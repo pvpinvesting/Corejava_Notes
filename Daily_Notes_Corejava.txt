@@ -475,7 +475,40 @@ String class have many useful methods to perform operations on sequence of chara
 	String trim()									Returns a copy of the string, with leading and trailing whitespace omitted.
 	String[] split(String regex)					Splits this string around matches of the given regular expression.
 
+*****************
+09-Oct-2023
+*****************
 
+java.lang.StringBuffer:	
+						StringBuffer is a class in Java that represents a mutable sequence of characters. It provides an alternative to the immutable String class, allowing you to modify the contents of a string without creating a new object every time.
+						
+						StringBuffer objects are thread-safe, which means multiple threads can access it simultaneously
+						
+						Syntax:
+								StringBuffer sb=new StringBuffer(); //By default initial capacity is 16
+								Or
+								StringBuffer sb=new StringBuffer(50);
+								Or
+								StringBuffer sb=new StringBuffer("Java");
+								
+								
+	methods:
+			append():	The append() method concatenates the given argument with this string.
+			insert():	The insert() method inserts the given string with this string at the given position. 
+			capacity():
+					The capacity() method of the StringBuffer class returns the current capacity of the buffer. The default capacity of the buffer is 16. If the number of characters increases from its current capacity, it increases the capacity by (oldcapacity*2)+2.
+					For instance, if your current capacity is 16, it will be (16*2)+2=34.
+			replace():	The replace() method replaces the given string from the specified beginIndex and endIndex-1.
+			delete():	The delete() method of the StringBuffer class deletes the string from the specified beginIndex to endIndex-1.
+			reverse():	The reverse() method of the StringBuilder class reverses the current string. 
+					
+java.lang.StringBuilder:									
+							The function of StringBuilder is very much similar to the StringBuffer class,StringBuilder class differs from the StringBuffer class on the basis of synchronization. String Builder is not thread-safe.
+					
+							The StringBuilder objects can be created same as StringBuffer and same methods present in this class.
+							
+						
+	
 
 	
 	
