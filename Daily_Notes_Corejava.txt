@@ -507,8 +507,84 @@ java.lang.StringBuilder:
 					
 							The StringBuilder objects can be created same as StringBuffer and same methods present in this class.
 							
-						
 	
+Difference between String, StringBuffer and StringBuilder:
+	Refer PPT.
+	
+
+Question:
+
+1. Print a first non-repeated character from a String.
+
+	Example : String is "Hello Hi"
+			  Out put is: e
+			  
+2. Given string is a Palindrom or not
+	Example : String is "madam"
+				out put is: Given string is a palindrom
+				
+
+*****************
+10-Oct-2023
+*****************
+Java arrays: 
+			Java array is an object which contains elements of a similar data type. Additionally, The elements of an array are stored in a contiguous memory location. It is a data structure where we store similar elements. We can store only a fixed set of elements in a Java array.
+			
+			Java array is index-based, the first element of the array is stored at the 0th index, 2nd element is stored on 1st index and so on.
+			
+			Java array is an object which inherits the object class. We can store primitive values or objects in an array in Java.
+			
+		Types of Array in java
+			Single Dimensional Array:	
+				Syntax of array declartion:
+					datatype[] ref-name;
+					or
+					datatype ref-name[];
+					
+				Syntax of array creation:
+				
+					datatype[] ref-name = {value1,value2,value3....valueN}; // if knows the values
+					or 
+					ref-name = new datatype[]{value1,value2,value3....valueN}; // if knows the values
+					or 
+					ref-name = new datatype[10]; // if we don't know the values then define a size.
+			
+			Multidimensional Array
+			
+			dataType[][] arrayRefVar; (or)  
+			dataType [][]arrayRefVar; (or)  
+			dataType arrayRefVar[][]; (or)  
+			dataType []arrayRefVar[];
+			
+			Example:
+				int[][] arr=new int[3][3];
+	
+	
+	Arrays Types and Their Allowed Element Types:
+	
+			Array Types								Allowed Element Types
+		Allowed Element Types					Any type which can be implicitly promoted to declared type.
+		Object Type Arrays						Either declared type objects or it’s child class objects.
+		Abstract Class Type Arrays				Its child-class objects are allowed.
+		Interface Type Arrays					Its implementation class objects are allowed.
+	
+			
+	Advantages:
+			Code Optimization: It makes the code optimized, we can retrieve or sort the data efficiently.
+			Random access: We can get any data located at an index position.
+			
+	Limitations of array:
+			Size Limit: We can store only the fixed size of elements in the array. It doesn't grow its size at runtime.
+			
+			int[] a = new int[4];
+			a.length = 10;         // error
+			
+
+java.util.Arrays:
+		Class Arrays in package java.util has useful static methods for manipulating arrays. This class provides static methods to dynamically create and access Java arrays. It consists of only static methods and the methods of Object class.
+		
+		refer ppt.
+		
 
 	
 	
