@@ -585,9 +585,138 @@ java.util.Arrays:
 		
 		refer ppt.
 		
+*****************
+11-Oct-2023
+*****************
+Variable Arguments (Varargs) in Java:
+
+	Variable Arguments (Varargs) were introduced in JDK 5. From JDK 5 onwards, we can declare a method with a variable number of arguments. Such types of methods are called Varargs methods. The varargs feature offers a simpler, better option.
+
+	public void fun(int... args) 
+	{
+	   // method body
+	} 
+
+	There can be only one variable argument in a method.
+	Variable argument (Varargs) must be the last argument.
+
+Enhanced for loop :
+	Enhanced for loop is introduced since J2SE 5.0. It provides an alternative approach to traverse the array or collection in Java. It is mainly used to traverse the array or collection elements.
+	
+	Syntax:
+		for(declaration : expression) {
+			// Statements
+		}
+		
+	Declaration − The newly declared block variable is of a type compatible with the elements of the array you are accessing.
+	Expression − This evaluates to the array you need to loop through. The expression can be an array variable or method call that returns an array.
+	
+	Eample:
+			int [] numbers = {10, 20, 30, 40, 50};
+			for(int x : numbers ) {
+					System.out.print( x );
+					System.out.print(" ");
+			}
 
 	
+Object class:
+	Object class is present in java.lang package. Every class in Java is directly or indirectly derived from the Object class. If a class does not extend any other class then it is a direct child class of Object and if extends another class then it is indirectly derived. 
+	Therefore the Object class methods are available to all Java classes. Hence Object class acts as a root of the inheritance hierarchy in any Java Program.
+	1. tostring() 
+	2. equals(Object obj)
+	3. hashCode()
+	4. getClass()
+	5. clone()
+	6. finalize()
+	7. wait()
+	8. notify()
+	9. notifyAll()
 	
+	1. toString():
+		// Default behavior of toString() is to print class name, then
+		// @, then unsigned hexadecimal representation of the hash code of the object
+				
+		Object class defined toString() method like this:
+				
+			public String toString()
+			{
+				return getClass().getName() + "@" + Integer.toHexString(hashCode());
+			}
+			
+			If we want to represent an object state as a string then we should override this method.
+				
+				
+	2. equals(Object obj): 
+		Object class defined equals() method like this:
+		
+			public boolean equals(Object obj) {
+				return (this == obj);
+			}
+			
+			So Object class equals() method implementation returns true only when both the references are pointing to same object.
+			
+	3. hashCode():
+		
+		Java Object hashCode() is a native method and returns the integer hash code value of the object. 
+		
+		The general contract of hashCode() method is:
 
+			=>Multiple invocations of hashCode() should return the same integer value, unless the object property is modified that is being used in the equals() method.
+			=>An object hash code value can change in multiple executions of the same application.
+			=>If two objects are equal according to equals() method, then their hash code must be same.
+			=>If two objects are unequal according to equals() method, their hash code are not required to be different. Their hash code value may or may-not be equal.
 	
+When to override equals() and hashCode() methods?
+			When we override equals() method, it’s almost necessary to override the hashCode() method too so that their contract is not violated by our implementation.
+			Note that your program will not throw any exceptions if the equals() and hashCode() contract is violated, if you are not planning to use the class as Hash table key, then it will not create any problem.
+			If you are planning to use a class as Hash table key, then it’s must to override both equals() and hashCode() methods. 
+			
+	4. getClass():
+			It returns the Class objects that represent the runtime class of this object.
+			
+	5. clone():
+			Cloning is the process of creating a copy of an Object. Java Object class comes with native clone() method that returns the copy of the existing instance. Since Object is the base class in Java, all objects by default support cloning.
+			
+			If you want to use Java Object clone() method, you have to implement the java.lang.Cloneable marker interface. Otherwise, it will throw CloneNotSupportedException at runtime. 
+			
+			Also Object clone is a protected method, so you will have to override it.
+
+
+
+
+
+
+
+
+
+
+
+Marker interface in Java:
+	It is an empty interface (no field or methods). Examples of marker interface are Serializable, Cloneable and Remote interface. All these interfaces are empty interfaces. 
 	
+	public interface Serializable 
+	{
+		// nothing here
+	}
+	
+	Cloneable interface:
+		Cloneable interface is present in java.lang package. There is a method clone() in Object class. A class that implements the Cloneable interface indicates that it is legal for clone() method to make a field-for-field copy of instances of that class. 
+		 
+		Invoking Object’s clone method on an instance of the class that does not implement the Cloneable interface results in an exception CloneNotSupportedException being thrown. 
+		
+	Serializable interface:
+		Serializable interface is present in java.io package. It is used to make an object eligible for saving its state into a file. This is called Serialization. 
+
+		Classes that do not implement this interface will not have any of their state serialized or deserialized. All subtypes of a serializable class are themselves serializable.
+		
+	Remote interface : 
+		Remote interface is present in java.rmi package. A remote object is an object which is stored at one machine and accessed from another machine. So, to make an object a remote object, we need to flag it with Remote interface. 
+		Here, Remote interface serves to identify interfaces whose methods may be invoked from a non-local virtual machine.Any object that is a remote object must directly or indirectly implement this interface.
+
+
+The general contract of hashCode is:
+
+During the execution of the application, if hashCode() is invoked more than once on the same Object then it must consistently return the same Integer value, provided no information used in equals(Object) comparison on the Object is modified. It is not necessary that this Integer value to be remained same from one execution of the application to another execution of the same application.
+If two Objects are equal, according to the equals(Object) method, then hashCode() method must produce the same Integer on each of the two Objects.
+If two Objects are unequal, according to the equals(Object) method, It is not necessary the Integer value produced by hashCode() method on each of the two Objects will be distinct. It can be same but producing the distinct Integer on each of the two Objects is better for improving the performance of hashing based Collections like HashMap, HashTable…etc.			
+		
