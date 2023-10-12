@@ -681,12 +681,17 @@ When to override equals() and hashCode() methods?
 			
 			Also Object clone is a protected method, so you will have to override it.
 
-
-
-
-
-
-
+*****************
+12-OCT-2023
+*****************
+	
+	6. finalize() :  Will discusss about this in Garbage collection.
+	
+	The following methods will discuss as part of threads concepts :
+	
+	7. wait()
+	8. notify()
+	9. notifyAll()
 
 
 
@@ -700,18 +705,162 @@ Marker interface in Java:
 	}
 	
 	Cloneable interface:
-		Cloneable interface is present in java.lang package. There is a method clone() in Object class. A class that implements the Cloneable interface indicates that it is legal for clone() method to make a field-for-field copy of instances of that class. 
+		Cloneable interface is present in java.lang package. There is a method clone() in Object class. A class that implements the Cloneable interface indicates that it is legal for clone() method to make a field-to-field copy of instances of that class. 
 		 
 		Invoking Object’s clone method on an instance of the class that does not implement the Cloneable interface results in an exception CloneNotSupportedException being thrown. 
 		
 	Serializable interface:
-		Serializable interface is present in java.io package. It is used to make an object eligible for saving its state into a file. This is called Serialization. 
+		Serializable interface is present in java.io package. 
+		Classes that do not implement this interface will not have any of their object state serialized or deserialized. All subtypes of a serializable class are themselves serializable.
+				
+		Serialization and Deserialization:
+			Serialization is a mechanism of converting the state of an object into a byte stream.
+			Deserialization is the reverse process where the byte stream is used to recreate the actual Java object in memory.
+			
+		Advantages of Serialization 
+			To save/persist state of an object. 
+			To travel an object across a network.
+			
+		SerialVersionUID: The Serialization runtime associates a version number with each Serializable class called a SerialVersionUID, which is used during Deserialization to verify that sender and receiver of a serialized object have loaded classes for that object which are compatible with respect to serialization. If the receiver has loaded a class for the object that has different UID than that of corresponding sender’s class, the Deserialization will result in an InvalidClassException. 
+			
+		
+		Point sto remember:
+			1. If a parent class has implemented Serializable interface then child class doesn’t need to implement it but vice-versa is not true. 
+			2. Only non-static data members are saved via Serialization process. 
+			3. Static data members and transient data members are not saved via Serialization process. So, if you don’t want to save value of a 	non-static data member then make it transient. 
+			4. Constructor of object is never called when an object is deserialized. 
 
-		Classes that do not implement this interface will not have any of their state serialized or deserialized. All subtypes of a serializable class are themselves serializable.
+		Refer image from ppt.
+		
 		
 	Remote interface : 
 		Remote interface is present in java.rmi package. A remote object is an object which is stored at one machine and accessed from another machine. So, to make an object a remote object, we need to flag it with Remote interface. 
 		Here, Remote interface serves to identify interfaces whose methods may be invoked from a non-local virtual machine.Any object that is a remote object must directly or indirectly implement this interface.
+
+
+Packages In Java:
+	Package in Java is a mechanism to encapsulate a group of classes, sub packages and interfaces. All we need to do is put related classes into packages. After that, we can simply write an import class from existing packages and use it in our program. 
+
+	Packages are used for:
+		1. Preventing naming conflicts. 
+			For example there can be two classes with name Employee in two packages, com.company.sales.Employee and com.company.marketing.Employee.
+			
+		2. Making searching/locating and usage of classes, interfaces, enumerations and annotations easier.
+		
+		3. Providing controlled access: protected and default have package level access control. A protected member is accessible by classes in the same package and its subclasses. A default member (without any access specifier) is accessible by classes in the same package only.
+		
+		4. Packages can be considered as data encapsulation (or data-hiding).
+		
+	Package naming conventions : 
+					Package names are recommended to write in small case. 
+					Packages are named in reverse order of domain names, 
+					i.e., com.grats.practice,  com.grats.controller, com.grats.service, com.grats.dao
+	
+	Adding a class to a Package : 
+			We can add more classes to a created package by using package name at the top of the program and saving it in the package directory. 
+			
+	Subpackages: 
+		Packages that are inside another package are the subpackages. These are not imported by default, they have to imported explicitly. Also, members of a subpackage have no access privileges, i.e., they are considered as different package for protected and default access specifiers.
+		
+	Accessing classes of a package:
+	
+		import package.*;	// All the classes and interfaces of this package will be accessible but not subpackages.
+			
+		import package.classname;	// Only mentioned class of this package will be accessible.
+		
+							
+		java.util.Arrays;	// import the Arrays class from util package.
+		
+		
+		import java.util.*; 	// import all the classes from util package
+		
+	Types of packages:
+		Built-in Packages:
+		
+			These packages consist of a large number of classes which are a part of Java API. Some of the commonly used built-in packages are:
+			
+			1) java.lang: Contains language support classes(e.g classed which defines primitive data types, math operations). This package is automatically imported.
+			2)  java.io: Contains classes for supporting input / output operations.
+			3)  java.util: Contains utility classes which implement data structures like Linked List, Dictionary and support ; for Date / Time operations.
+			4)  java.applet: Contains classes for creating Applets.
+			5)  java.awt: Contain classes for implementing the components for graphical user interfaces (like button , ;menus etc).
+			6)  java.net: Contain classes for supporting networking operations.
+		
+		User-defined packages:
+			These are the packages that are defined by the user. First we create a directory mypackage (name should be same as the name of the package). Then create the MyClass inside the directory with the first statement being the package names.
+			
+			/ Name of the package must be same as the directory
+			// under which this file is saved
+			package mypackage;
+
+			public class MyClass
+			{
+				public void getNames(String s)
+				{        
+					System.out.println(s);        
+				}
+			}
+	
+	Using Static Import:
+		Static import is a feature introduced in Java programming language ( versions 5 and above ) that allows members ( fields and methods ) defined in a class as public static to be used in Java code without specifying the class in which the field is defined.
+		
+		import static java.lang.System.*; 
+   
+		class StaticImportDemo 
+		{ 
+		   public static void main(String args[]) 
+		   {       
+				// We don't need to use 'System.out'  
+				// as imported using static. 
+				out.println("Hello"); 
+		   } 
+		} 
+	
+	Handling name conflicts
+		The only time we need to pay attention to packages is when we have a name conflict . For example both, java.util and java.sql packages have a class named Date. 
+		
+		So if we import both packages in program as follows:
+					
+		import java.util.*;
+		import java.sql.*;
+		
+		//And then use Date class, then we will get a compile-time error :
+
+		Date today ; //ERROR-- java.util.Date or java.sql.Date?
+	
+	How to convert our project as a jar file.
+		
+		set PATH=C:\Program Files\Java\jdk-19\bin
+		
+		jar cf jar-file input-file(s)
+		
+		
+		download the de-compiler from below url
+		
+		https://java-decompiler.github.io/
+	
+		C:\Users\Prakash\Downloads\jd-gui-windows-1.6.6\jd-gui-windows-1.6.6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 The general contract of hashCode is:
