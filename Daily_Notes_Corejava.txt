@@ -751,6 +751,10 @@ Packages In Java:
 		
 		4. Packages can be considered as data encapsulation (or data-hiding).
 		
+		https://grats.in.com
+		
+		com.in.grats
+		
 	Package naming conventions : 
 					Package names are recommended to write in small case. 
 					Packages are named in reverse order of domain names, 
@@ -840,6 +844,71 @@ Packages In Java:
 		https://java-decompiler.github.io/
 	
 		C:\Users\Prakash\Downloads\jd-gui-windows-1.6.6\jd-gui-windows-1.6.6
+
+*****************
+13-Oct-2023
+*****************
+
+Garbage Collection:
+		Garbage Collection is a process of reclaiming the runtime unused memory automatically. In other words, garbage collector finds the unused objects and deletes them to free up memory.
+		
+		In C/C++, a programmer is responsible to clean up the objects. But, in java it is performed automatically. So, java provides better memory management.
+		
+			
+		Important Concepts Related to Garbage Collection in Java:
+		
+			1. Unreachable objects: 
+					An object is said to be unreachable if it doesn’t contain any reference to it. 
+					Integer i = new Integer(4); // the new Integer object is reachable  via the reference in 'i' 
+					i = null;
+					// the Integer object is no longer reachable. 
+				
+			2. Eligibility for garbage collection: 
+					An object is said to be eligible for GC(garbage collection) if it is unreachable. After i = null, integer object 4 in the heap area is suitable for garbage collection in the above image.
+					
+		Ways to make an object eligible for Garbage Collector:
+			1. Nullifying the reference variable
+			2. Re-assigning the reference variable
+			3. An object created inside the method
+			
+		Ways for requesting JVM to run Garbage Collector
+				Once we make an object eligible for garbage collection, it may not destroy immediately by the garbage collector. Whenever JVM runs the Garbage Collector program, then only the object will be destroyed. But when JVM runs Garbage Collector, we can not expect.
+				
+			1. Using System.gc() method: System class contain static method gc() for requesting JVM to run Garbage Collector.
+			2. Using Runtime.getRuntime().gc() method: Runtime class allows the application to interface with the JVM in which the application is running. Hence by using its gc() method, we can request JVM to run Garbage Collector.
+			
+		Finalization:
+			=> Just before destroying an object, Garbage Collector calls finalize() method on the object to perform cleanup activities. Once finalize() method completes, Garbage Collector destroys that object.
+			
+			=> finalize() method is present in Object class with the following prototype.
+			
+				protected void finalize() throws Throwable
+			
+			Based on our requirement, we can override finalize() method for performing our cleanup activities like close the resources or closing connection from the database.
+			
+			=>The finalize() method is called by Garbage Collector, not JVM. However, Garbage Collector is one of the modules of JVM.
+			=>Object class finalize() method has an empty implementation. 
+			=>The finalize() method is never invoked more than once for any object.
+			=>If an uncaught exception is thrown by the finalize() method, the exception is ignored, and the finalization of that object terminates.
+		
+		Advantages of Garbage Collection in Java
+			It makes java memory-efficient because the garbage collector removes the unreferenced objects from heap memory.
+			It is automatically done by the garbage collector(a part of JVM), so we don’t need extra effort.
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
