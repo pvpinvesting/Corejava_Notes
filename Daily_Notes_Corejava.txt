@@ -896,45 +896,170 @@ Garbage Collection:
 			It is automatically done by the garbage collector(a part of JVM), so we don’t need extra effort.
 		
 
+***************
+16-OCT-2023
+***************
 
+Multi Tasking:
+	The concept of executing multiple functionalities simultaneously one with the other is known as "Multi Tasking".
+	
+	In Multitasking multiple functions are executed simultaneously but not multiple statements.
+	
+	Advantages:
+				Using multitasking we can avoid idle state of the CPU completely. 
+				Idle state is that state of the CPU waiting for the execution of the I/O operations.
+				Using multitasking we can make the functionalities independent of each other.
 
+When do we go for multitasking?
+	Whenever it is required to execute multiple functionalities simultaneously and independently and then show outputs of it simultaneously one with the other then only we apply the concept of multitasking in our java programming.
+	Example :
+				void animation(){
+				//statements
+				}
+				
+				void createAccount(){
+				//statements
+				}
+				
+				main(){
+					animation();
+					createAccount();
+				}
 
+				
+Types of multitasking:
+	There are two types of multitasking:            
+		1. Process based multitasking            
+		2. Thread based multitasking     
+		
+	1. Process based multitasking: 
+		->The concept of executing the two different applications or programs of two different technologies simultaneously one with the other is known as process based multitasking.          
+		->In this the control has to switch between the different environments or domains whose addresses are entirely different this increases overhead on the system.
+		->This process based multitasking is not under the control of Java. So we can say this is not supported by Java.
+		
+    2. Thread based multitasking:
+		->The concept of executing multiple functionalities belonging to the same application of the same technology simultaneously one with the other is known as Thread based multitasking.
+		->In this the control would be switching between the two different functionalities belonging to the same application or domain because of which there wouldn't be any overhead on the system thus Java supports only Thread based multitasking.
+		
+What is a Thread? What is the difference between thread and function?
 
+	-> Thread is nothing but a functionality which could be executed simultaneously or parallelly with the other part of the program.
+	-> A Thread is a very light-weight subprocess, or we can say the smallest part of the process that allows a program to operate more efficiently by running multiple tasks simultaneously.
+	
+	-> From where as a method or function is also a functionality which would be executed hierarchically with the other part of the program based on certain order.
+	
+	->Thread executes one with the other (parallelly) but the method executes one after another (sequentially).
 
+	Java Thread Benefits:
+		-> In order to perform complicated tasks in the background, we used the Thread concept in Java.
+		-> Java Threads are lightweight compared to processes, it takes less time and resources to create a thread.
+		-> Threads share their parent process data and codeContext switching between threads is usually less expensive than between processes.
+		-> Thread intercommunication is relatively easier than process communication.
+		
+What is a process? What is the relation between process and thread?
+	-> A program (group of functions or collection of functions) is under execution is a process.
+	-> Thread is a part of the process.
+	-> A function under execution is not a process, it is a part of the process.
+	
+How to create a Thread in Java?    Java provides two ways to create a thread programmatically.   
 
+	1. Implementing the java.lang.Runnable interface.
+	2. Extending the java.lang.Thread class.
+	
+	1. Implementing the java.lang.Runnable interface:
+		
+		To make a class as a Thread, we can implement java.lang.Runnable interface and provide implementation of public void run() method. We need to create a Thread object by passing object of this runnable class and then call start() method to execute the run() method in a separate thread. 
+		
+		Example:
+		
+		syntax:
+			public class ThreadA implements Runnable{
+				public void run(){
+					//Statements
+				}
+			}
+			
+			Thread thread = new Thread(new ThreadA());
+			thread.start()
+		
+	2. Extending the java.lang.Thread class.
+		We can extend java.lang.Thread class to create our own java thread class and override run() method. Then we can create it’s object and call start() method to execute our custom java thread class run method. 
+	
+		Example:
+			public class ThreadB extends Thread{
+				public void run(){
+					//Statements
+				}
+			}
 
+			ThreadB thread1 = new ThreadB();
+			thread.start()
+*****************
+17-Oct-2023
+*****************
 
+Thread Class vs Runnable Interface 
 
+	Runnable:																Thread:
+													
+	->It is an interface.										It is a class.
+	->It can be used to create a thread.						It can be used to create a thread.
+	->It has a single abstract method ‘run’.					It has multiple methods such as ‘start’ and ‘run’.
+	->It requires less memory space.							It requires more memory space.
+	->When a class implements the ‘runnable’ interface, 		Since multiple inheritance is not allowed in Java, 
+		the class can extend to other classes.							hence, after a class extends the Thread class, it can’t extend to any other class.
 
+The two steps of implementing thread based multitasking in Java:
+	
+Step 1:	We can define a functionality as a thread in Java either by implementing the run() of Runnable interface or overriding the run() of Thread class. 
+		
+Step 2: Calling the start() of a Thread class can execute the run() method as a thread.
+			
+			Note : If we call the run() directly it executes like a normal function.
+			
+start() of a thread class:
+	The functionality of the start() is only to handover the run() to JVM for scheduling.
+	
+	scheduling: 
+				-> JVM allocates the time for the processor to execute the run() (i.e. thread) and it decids when the execution of run() (i.e., thread) to start and which thread has to continue next is known as a scheduling.
+				-> Output of any thread would be based on scheduling. Thus we can't predict exact output of a thread application.
+				-> Actually scheduling is the process of the local OS where JVM utilises it.
+				-> Scheduling is highly dynamic.
+				-> Scheduling is not done based on first come first serve.
 
+What is Multi Threading:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-The general contract of hashCode is:
-
-During the execution of the application, if hashCode() is invoked more than once on the same Object then it must consistently return the same Integer value, provided no information used in equals(Object) comparison on the Object is modified. It is not necessary that this Integer value to be remained same from one execution of the application to another execution of the same application.
-If two Objects are equal, according to the equals(Object) method, then hashCode() method must produce the same Integer on each of the two Objects.
-If two Objects are unequal, according to the equals(Object) method, It is not necessary the Integer value produced by hashCode() method on each of the two Objects will be distinct. It can be same but producing the distinct Integer on each of the two Objects is better for improving the performance of hashing based Collections like HashMap, HashTable…etc.			
+	=> The concept of defining multiple functionalities as threads and executing these functionalities simultaneously one with the other as threads is known as Multi Threading. Simply can say Multithreading in Java is a process of executing multiple threads simultaneously.
+	
+	=> Multithreading is a Java feature that allows concurrent execution of two or more parts of a program for maximum utilization of CPU. Each part of such program is called a thread. So, threads are light-weight processes within a process.
+	
+	=> Example:
+		class ThreadA extends Thread{
+			public void run(){
+				// statements
+			}
+		}
+		
+		class ThreadB implements Runnable{
+			public void run(){
+				// statements
+			}
+		}
+		
+		class ThreadC extends Thread{
+			public void run(){
+				// statements
+			}
+		}
+		
+		class ThreadTest{
+			psvm(){
+				ThreadA t1=new ThreadA();
+				Thread t2=new Thread(new ThreadB());
+				ThreadC t3=new ThreadC();
+				t1.start();
+				t2.start();
+				t3.start();
+			}
+		}
 		
