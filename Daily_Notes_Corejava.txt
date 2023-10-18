@@ -1063,3 +1063,90 @@ What is Multi Threading:
 			}
 		}
 		
+Suspending a thread in the middle of its execution:
+
+	1. Suspending a thread based on time: 
+		sleep(): 
+				The sleep() method is used to stop the execution of the current thread(whichever might be executing in the system) for a specific duration of the time and after that time duration gets over, the thread which is executing earlier starts to execute again.
+			
+			-> It is a static method in Thread class 
+			-> Suspending a thread in the middle of its execution for the mentioned period of time.
+			-> syntax:
+					try {
+						Thread.sleep(5000); // Here should pass the time in milliseconds. passing 5 seconds
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+			-> Which throw checked exception.
+			
+			Important Point Regarding Thread.sleep() Method:
+
+				->Method Whenever Thread.sleep() functions to execute, it always pauses the current thread execution.
+				->If any other thread interrupts when the thread is sleeping, then an InterruptedException will be thrown.
+				->If the system is busy, then the actual time the thread will sleep will be more as compared to that passed while calling the sleep method.
+				
+	2. Suspending a thread based on the execution of another thread.
+	
+		Thread class provides the join() method which allows one thread to wait until another thread completes its execution. 
+		
+		t1
+		run(){
+			//Statements
+		}
+		
+		t2
+		run(){
+			//Statements
+		}
+		
+		If suppose Thread3 is dependent on Thread1 completion then we can use the join()
+		
+		t3
+		run(){
+			t3.join();
+			//statements
+		}
+		
+	3. suspending a thread unconditionally:
+		
+		suspend() and resume():
+			suspend():This is a method used to suspend the thread. The thread will remain suspended and won’t perform its tasks until it is resumed.
+			resume():This is a method used to resume the suspended thread.
+			
+			-> These 2 methods are deprecated, by using these methods the program can enter into a deadlock. So don't prefer it.
+			-> Instead of these methods we can use the wait() & notify()
+
+Thread Safe:
+
+		When multiple threads are working on the same data, and the value of our data is changing, that scenario is not thread-safe and we will get inconsistent results. 
+		When a thread is already working on an object and preventing another thread from working on the same object, this process is called Thread-Safety. 
+
+		Synchronization:
+			Synchronization is the process of allowing only one thread at a time to complete the particular task.
+			It means when multiple threads are executing simultaneously, and want to access the same resource at the same time, then the problem of inconsistency will occur. so synchronization is used to resolve inconsistency problems by allowing only one thread at a time.
+			
+			synchronized is a keyword. We implement the concept of thread safety by using synchronized keyword.
+
+			syntax:
+			
+			synchronized void methodA(){ //method level
+				//Statements
+			}
+			
+			or
+			
+			methodB(){
+			//Statements
+				synchronized(this){ // block level
+				
+				}
+				or 
+				synchronized(object){
+				
+				}
+			//Statements
+			}
+		
+		
