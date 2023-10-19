@@ -1110,6 +1110,7 @@ Suspending a thread in the middle of its execution:
 		}
 		
 	3. suspending a thread unconditionally:
+	
 		
 		suspend() and resume():
 			suspend():This is a method used to suspend the thread. The thread will remain suspended and won’t perform its tasks until it is resumed.
@@ -1148,5 +1149,63 @@ Thread Safe:
 				}
 			//Statements
 			}
+			
+*****************	
+19-Oct-2023	
+*****************
+
+wait(),notify() & notifyAll():
+	These are final methods defined in the Object class and can be called only from within a synchronized context.
+
+wait():
+		the wait() method causes the current thread to wait until another thread invokes the notify() or notifyAll() methods for that object.
 		
+notify(): 
+
+		The notify() method wakes up a single thread that is waiting on that object’s monitor. 
+
+		Wakes up a single thread that is waiting on this object's monitor. If any threads are waiting on this object, one of them is chosen to be awakened.
 		
+		notify() places a request to jvm for rescheduling, then the thread which is in wait state back into action state.
+	
+notifyAll():
+		The notifyAll() method wakes up all threads that are waiting on that object’s monitor. 
+		
+volatile:
+		The volatile keyword in Java is used to indicate that a variable's value may be modified by multiple threads simultaneously. It ensures that the variable is always read from and written to the main memory, rather than from thread-specific caches, ensuring visibility across threads.
+		
+		syntax:
+			public class Comman{
+				volatile boolean flag=true;
+			}
+
+Priorities:
+	-> We use the priorities for controlling the rescheduling of threads when the threads are in wait sate.
+	-> notify() would be notify the rescheduling based on the priorities of the threads mentioned.
+	-> priorities ranges from 1 to 9. 
+		1 is lowest priority.
+		9 is higest priority.
+	-> The priority is consider only at the time of rescheduling of threads.
+	-> The default priority of any thread is always 5 because the priority of main thread is 5.
+	-> If we don't sent any priority to a thread, automatically the priority of the parent thread is given to the child thread. 
+	
+		syntax:
+			t1.setPriority(int);
+
+yield():
+
+	A yield() method is a static method of Thread class and it can stop the currently executing thread and will give a chance to other waiting threads of the same priority. If in case there are no waiting threads or if all the waiting threads have low priority then the same thread will continue its execution.
+
+Daemon Threads:
+	-> A thread which get suspended permanantely once the execution of its parent thread is completed is known as Daemon Thread.
+	-> Garbage collector is the example for Daemon threads.
+	-> Garbage collector is one of the thread which is working as soon as JVM starts executiion, once the execution of JVM is completed then automatically Garabage collector also terminated.
+	
+	syntax:
+		t1.setDaemon(true);
+			
+Thread life Cycle:
+				
+			
+	
+			
