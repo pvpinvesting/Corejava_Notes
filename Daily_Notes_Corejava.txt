@@ -1205,7 +1205,55 @@ Daemon Threads:
 		t1.setDaemon(true);
 			
 Thread life Cycle:
-				
-			
+
+	
+*****************
+26-Oct-2023
+******************
+Collections & Collection Framework:
+
+	-> The Java Collections Framework is a library of classes and interfaces for working with collections of objects.
+	-> The java.util.*; package contains all the classes and interfaces for the Collection framework.
+	-> A collection is an object which can store other objects, called elements. Collections provide methods for adding and removing elements, and for searching for a particular element within the collection.
+	-> Collection means group of elements
+	-> Collection supports only objects.
+	-> Collections don't support primitive data types.
+	-> Collection changes dynamically.
+	-> It has many library classes to represent or support a group of elements.
+	-> Collection classes follow data structure.
+	-> Any data structure contains a group of elements
+	-> The way of arranging elements changes from data structure to data structure.
+
+Difference between arrays and collections:
+
+			Collections 													Arrays
+
+		1. Collections are used to represent a group of elements. 		1. Arrays are used to represent a group of elements.
+		2. Collections support only objects 							2. Arrays support both objects and primitive data type values.
+			and don't support the primitive data type value.
+		3. The size of the collection can change at runtime 			3. The size of the array is always fixed, so it can't change at runtime.
+			Thus the size of the collection is always dynamic.
+		4. There are many library classes representing different 		4. Arrays are predefined structures of jvm.
+			kinds of collections.
+
+Collections:
+	-> Collection can hold homogeneous as well as heterogeneous data elements.
+	-> Collections represent the data structures as we have many data structures and we also have many collection classes.
+	-> Using objects of any collection class we can represent the group of elements.
+	-> The procedure followed to maintain the group of elements is to arrange the group of elements within the collection object changes from collection class to collection class.
+	-> All the collection classes are divided into three different types and there are:
+
+	1. List collections
+	2. Map collections
+	3. Set collections
+
+	-> All the collection classes would be supporting certain basic and fundamental operations like adding an element, accessing an element, removing an element and getting the size of the collection
+		All these functionalities that are supposed to be supported by the collection classes are defined in an interface by name "Collection".
+
+												Collection (Super Interface)
+													|
+									________________________________
+									|								|
+									List (Sub Interface)			Set(Sub Interface)			
 	
 			
