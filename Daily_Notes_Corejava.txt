@@ -1250,10 +1250,100 @@ Collections:
 	-> All the collection classes would be supporting certain basic and fundamental operations like adding an element, accessing an element, removing an element and getting the size of the collection
 		All these functionalities that are supposed to be supported by the collection classes are defined in an interface by name "Collection".
 
-												Collection (Super Interface)
-													|
-									________________________________
-									|								|
-									List (Sub Interface)			Set(Sub Interface)			
+																Collection 
+																	|
+									___________________________________________________________________
+									|								|								   |
+									List 						  Queue		  						  Set 		
+
+	ArrayList: 
+				The ArrayList class implements the List interface. It uses a dynamic array to store the elements. 
+				The ArrayList class maintains the insertion order and is non-synchronized.
+				The ArrayList class maintains the duplicate elements.
+				The elements stored in the ArrayList class can be randomly accessed. 
+				If the array size reached to its capacity then its capacity is incremented by 50%.
+				
+				constructors:
+					ArrayList();
+					ArrayList(capacity);
+					ArrayList(Collection);
+				
+				methods:
+					add(element), add(index,element), size(), clear(), isEmpty(),ensureCapacity(newcapacity),remove(index),remove(element), contains(element)
+				
+				
+--> accessing collection:
+				
+						1. for loop
+						2. enhanced for loop
+						3. iterator
+						4. listIterator
+						
+					iterator:
+						hasNext()	: return true if it has the next element otherwise false.
+						next()		: returns the next element.
+						remove()	: remove the element.
+						
+					listIterator:
+						add(element)  	: adds the element to the list at the position just before the element that will be returned by the next call to the next() method.
+						hasPrevious() 	: return true if the cursor having the previous element otherwise false.
+						nextIndex()	  	: It returns the next index value.
+						previous()		: returns the previous element from the list. If the iterator at the beginning of the list then it throws NoSuchElementException.
+						previousIndex()	: returns previous index.
+						set(element)	: replaces the element returned by the last call.
+						
+						
+	LinkedList:
+				LinkedList implements the List and Deque interface. It uses a doubly linked list internally to store the elements. It can store the duplicate elements. It maintains the insertion order and is not synchronized. In LinkedList, the manipulation is fast because no shifting is required.
+				
+				constructors:
+					LinkedList();
+					LinkedList(Collection);
+				
+				methods:
+					add(element), add(index,element), size(), clear(), isEmpty(),ensureCapacity(newcapacity),remove(index),remove(element), contains(element)
+					addFirst(element),addLast(element),
+						
+				
+	Difference between ArrayList & LinkedList:
 	
-			
+								ArrayList																	LinkedList
+					
+	1. This class uses a dynamic array to store the elements in it. 				1. This class uses a doubly linked list to store the elements in it.
+	2. Manipulation with ArrayList is slow because it internally uses an array. 	2. Manipulation with LinkedList is faster than ArrayList 
+		If any element is removed from the array, 										because it uses a doubly linked list, so no shifting is required in memory.
+		all the other elements are shifted in memory.
+	3. An ArrayList class can act as a list only because it implements List only.	3. LinkedList class can act as a list and queue both 
+																						because it implements List and Deque interfaces.	
+	4. ArrayList is better for storing and accessing data.							4. LinkedList is better for manipulating data.
+	5. Generally, when an ArrayList is initialized, 
+		a default capacity of 10 is assigned to the ArrayList.						5. There is no case of default capacity in a LinkedList. 
+																						In LinkedList, an empty list is created when a LinkedList is initialized.
+																						
+																						
+	Vector:
+			Vector is like the dynamic array which can grow its size. Unlike array, we can store n-number of elements in it as there is no size limit. It is a part of Java Collection framework since Java 1.2. It is found in the java.util package and implements the List interface, so we can use all the methods of List interface here.
+
+			It is recommended to use the Vector class in the thread-safe implementation only. If you don't need to use the thread-safe implementation, you should use the ArrayList, the ArrayList will perform better in such case.
+
+			The Iterators returned by the Vector class are fail-fast. In case of concurrent modification, it fails and throws the ConcurrentModificationException.
+
+			constructors:
+				Vector()
+				Vector(Collection c)
+				Vector(int initialCapacity)
+				
+			methods:
+				capacity(),size(),add(element),add(index,element),clear(),isEmpty(),remove(index),removeElement(element),removeAll(Collection),addAll(Collection)
+				
+
+	It is similar to the ArrayList, but there are some differences-
+		
+
+								ArrayList																		Vector
+	1. ArrayList is not synchronized.												1. Vector is synchronized.
+	2. ArrayList increments 50% of current array size 								2. Vector increments 100% means doubles the array size 
+		if the number of elements exceeds from its capacity.							if the total number of elements exceeds than its capacity.
+	3. ArrayList is not a legacy class. It is introduced in JDK 1.2.				3. Vector is a legacy class.
+	4. ArrayList is fast because it is non-synchronized.							4. Vector is slow because it is synchronized, 
+	5. ArrayList uses the Iterator interface to traverse the elements.				5. A Vector can use the Iterator interface or Enumeration interface to traverse the elements.
