@@ -1684,3 +1684,178 @@ Database:
 				SELECT * FROM EMP;
 				Or
 				SELECT ID,NAME,SALARY FROM EMP WHERE ID=1001;
+				
+
+What is JDBC?
+	JDBC is a technology to communicate with the DB through the Java Application to perform the DB operations.
+	
+	-> The Java application which is written by the user to communicate with the DB is called a "JDBC Application".
+	-> Java provides some set of interfaces with the package called "java.sql", so that users can import and use these interfaces in the JDBC Application to communicate with any DB through the Java Application.
+	->The following are the list of Interfaces available in the java.sql package.
+		1. Connection
+		2. Statement
+		3. ResultSet
+		4. PreparedStatement
+		5. CallableStatement
+		6. ResultSetMetaData
+		7. DataBaseMetaData
+		
+	-> Every interface is defined with the set of "abstract specification methods" related to the DB without any implementation details.
+	-> The vendor of the DB will provide the implementation classes for all these classes which are called as "JDBC Driver Classes"
+	-> JDBC Driver objects will act as intermediate objects between the java application & DB.
+	-> The user can call the required vendor implemented methods available in the respective interface. Objective to perform the respective DB operations from the Java application.
+
+JDBC Architecture:
+
+	JDBC has the following components that are used for the interaction with the database.
+	
+		1. JDBC API
+		2. JDBC Driver Manager
+		3. JDBC Driver
+		
+		1) JDBC API: 
+					JDBC API provides various interfaces and methods to establish easy connection with different databases.
+					 javax.sql.*;
+					 java.sql.*;
+					 
+		2) JDBC Driver manager: 
+					JDBC Driver manager loads the database-specific driver into an application in order to establish the connection with the database. The JDBC Driver manager is also used to make the database-specific call to the database in order to do the processing of a user request.
+					
+		3) JDBC Drivers: 
+					To interact with a data source with the help of the JDBC, one needs a JDBC driver which conveniently interacts with the respective data source.
+					
+					JDBC drivers are client-side adapters (installed on the client machine, not on the server) that convert requests from Java programs to a protocol that the DBMS can understand. 
+					
+				There are 4 types of JDBC drivers:
+					Type-1 driver or JDBC-ODBC bridge driver
+					Type-2 driver or Native-API driver
+					Type-3 driver or Network Protocol driver
+					Type-4 driver or Thin driver ( This is the driver currently using by all JDBC applications)
+					
+				-> Basically Database understands SQL.
+				-> Java understand method calls.
+				-> JDBC Driver translate java method calls to Database SQL statements.
+
+	-> We should follow the below steps in every JDBC application to communicate with the DB.
+	
+		1. import of the packages
+		2. Load Driver
+		3. Register Driver
+		4. Create Connection
+		5. Create Statement
+		6. Execute Statement
+		7. Close
+		
+		Step 1:	importing the required interfaces.
+		
+				import java.sql.Connection;
+				import java.sql.DriverManager;
+				import java.sql.ResultSet;
+				import java.sql.SQLException;
+				import java.sql.Statement;
+	
+		Step 2: Load the Driver to our application by using following code.
+		
+				Before JDBC version 4 and Java SE 1.6 we were loading the driver class like below. but now it loads automatically.
+				Class.forName("oracle.jdbc.OracleDriver");
+				
+		Step 3:
+				Register Driver : This happens automatically at run time.
+				
+				DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+				
+		Step 4: Create the Connection by using the following code.
+		
+				Connection con=DriverManager.getConnection(connectionStr, username, password);
+		
+		Step 5:
+				Create a Statement by using the following code.
+				Statement st=con.createStatement();
+				
+		Step 6:
+				Execute the statement
+				ResultSet rs=st.executeQuery(sql);
+				or 
+				int count=st.executeUpdate(sql);
+				
+		Step 7: Closing the resources.
+					rs.close();
+					st.close();
+					con.close();
+					
+		
+		The statement interface is used to create SQL basic statements in Java it provides methods to execute queries with the database. There are different types of statements that are used in JDBC as follows:
+
+		1. Statement
+		2. PreparedStatement
+		3. CallableStatement
+		
+		1. Statement :
+				From the connection interface, you can create the object for this interface. It is generally used for general–purpose access to databases and is useful while using static SQL statements at runtime.
+				
+				Syntax:
+
+					Statement statement = connection.createStatement();
+					
+			Implementation: Once the Statement object is created, there are three ways to execute it.
+			
+			boolean execute(String SQL): 
+						It is used to execute SQL DDL statements or for dynamic SQL. If the ResultSet object is retrieved, then it returns true else false is returned. 
+						Example: create table, alter table, etc. 
+						
+						In realtime, these kind of DDL operations do in databases by sql scripts. don't run from Java application.
+			
+			int executeUpdate(String SQL): 
+					It is used to execute SQL DML statements, like INSERT, DELETE or UPDATE statements. It returns number of rows that are affected by the execution of the statement.
+					
+			ResultSet executeQuery(String SQL): 
+					It is used to retrieve the data from database, basically to run the SQL SELECT. It returns a ResultSet object which holds the data that fetched from select query.
+					
+		2. PreparedStatement :
+				Prepared Statement represents a compiled SQL statement once, that can be executed many times. This accepts parameterized SQL queries. In this, “?” is used instead of the parameter, one can pass the parameter dynamically by using the methods of PreparedStatement at run time.
+				
+				Example:
+
+					PreparedStatement ps=con.prepareStatement("INSERT INTO EMP VALUES(?,?,?,?,?,?,?)");
+					
+								ps.setInt(1, 1001+i);
+								ps.setString(2,"Rakesh");
+								ps.setDouble(3, 9000.00);
+				
+				boolean execute(): This returns a boolean value and executes a static SQL statement that is present in the prepared statement object.
+				boolean executeUpdate(): Returns the number of rows affected by the DML statements such as INSERT, DELETE, and more that is present in the current Prepared Statement.
+				ResultSet executeQuery(): Returns a ResultSet from the current prepared statement.
+				
+		3. CallableStatement :
+				CallableStatement interface is used to call the stored procedures and functions. 
+				We can have business logic on the database by the use of stored procedures and functions that will make the performance better.
+				
+				Example to call the procedure:
+					CallableStatement cs = con.prepareCall("{call fetch_emp_sal(?,?)}");
+					cs.setInt(1, 1001);
+					cs.registerOutParameter(2, Types.DOUBLE);
+					cs.execute();
+					Double sumSal=cs.getDouble(2);
+					
+				Example to call the function:
+					
+					CallableStatement cs = con.prepareCall("{?=call fetch_all_emp_sal(?)}");
+					cs.registerOutParameter(1, Types.DOUBLE);
+					cs.setInt(2, 1001);
+					cs.execute();
+					Double sumSal=cs.getDouble(1);
+					
+Batch processing:
+		Batch Processing allows you to group related SQL statements into a batch and submit them with one call to the database.
+		When you send several SQL statements to the database at once, you reduce the amount of communication overhead, thereby improving performance.
+		
+		The following methods are used for batch processing:
+		
+			addBatch() :
+			  The addBatch() method of Statement, PreparedStatement, and CallableStatement is used to add individual statements to the batch. 
+			  
+			int[] executeBatch() :
+				The executeBatch() is used to start the execution of all the statements grouped together. Which returns an array of integers, and each element of the array represents the update count for the respective update statement.
+				
+			clearBatch():
+				This method removes all the statements you added with the addBatch() method.
