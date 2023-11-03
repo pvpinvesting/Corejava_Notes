@@ -1778,6 +1778,7 @@ JDBC Architecture:
 				or 
 				int count=st.executeUpdate(sql);
 				
+				
 		Step 7: Closing the resources.
 					rs.close();
 					st.close();
@@ -1859,3 +1860,12 @@ Batch processing:
 				
 			clearBatch():
 				This method removes all the statements you added with the addBatch() method.
+
+
+git status
+
+git add <filename or folder>
+
+git commit -m <message>
+
+git push origin <branch name>
