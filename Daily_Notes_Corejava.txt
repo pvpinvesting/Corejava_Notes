@@ -1869,3 +1869,426 @@ git add <filename or folder>
 git commit -m <message>
 
 git push origin <branch name>
+
+
+*****************************************************************************************************************
+						Web Application Development
+*****************************************************************************************************************
+
+What is a web application?
+	=> Any computer application is said to be a web application if its services are accessible through the web(internet service).
+	=> Internet based applications or online applications are nothing but web applications.
+	=> In general a web application is nothing but a website.
+	=> web applications provide online services to customers.
+	=> A computer application that is running within the webserver and invoked from the web browser is known as a web application.
+	
+What is a Java based web application (website)?
+	=> In the web application if the coding language is Java and web technologies are Java based web technologies(Servlets & JSP), it is known as Java based web application.
+	
+What is the architecture of a web application?
+	
+								Http Request			Web Server
+	Web Client 				------------------->		Web application
+	/ Browser				<------------------>
+	/ Http Client 				Http Response
+
+What is a web client?
+	=> A web client is in fact browser software .
+		Example: Internet Explorer, Chrome, Mozilla firefox.
+		
+What is a web server?
+	=> A web server is a server software.
+	=> The primary role of a web server is to store, process, and deliver requested information or webpages to end users.
+	
+What are the limitations of a web server?
+	=> It can provide support only for informative websites but not for interactive websites.
+	=> Web server can take user input but it can't communicate with database server, it can't process data and it also cannot produce the response pages.
+	
+How is web programming classified?
+	=> In the context of a web application(website) we have 2 kinds of programming.
+		1. Client side programming.
+		2. Server side programming.
+	
+	1) Client side programming:
+		=> To perform client side validations to enforce the end-user to enter the complete input and proger input, whatever coding we do in the input page using Javascript language, it is nothing but client side programming.
+	
+	2) Server Side Programming:
+		=> Developing a piece of code that is executed within the process space of Web Server is known as server side programming.
+		=> To overcome the limitations of a webserver and thereby making websites not only informative but also interactive, we go for server side programming.
+		
+What are the general responsibilities of a server side program?
+	1. Capturing the user input
+	2. Communicating with databases for data.
+	3. Processing of data.
+	4. producing the response page based on the processed data and handing over the same to the webserver.
+	
+How are web pages classified?
+	=> Web pages are divided into two types.
+		1. Static pages
+		2. Dynamic pages.
+		
+		1. Static pages:
+				=> Static pages are pre-created pages whose source code is stored in the file system of the web server machine as HTML documents.
+				=> Static pages content remains the same with user interaction.
+				
+		2. Dynamic pages:
+				=> After receiving the client request depending upon the processed data, programmatically created web pages are Dynamic pages, their content change with user interaction.
+		
+What is a Web container?
+	=> A web container is server software that comprises 3 modules.
+		1. Web Server		
+		2. Servlet Engine	(Servlet Container)
+		3. JSP Engine		(JSP Container)
+		
+		Example: Tomcat.
+		
+		Note: For a Java based web application, web server alone is not sufficient, requires servlet container and JSP Container.
+		
+What is a Servlet?
+	=> Servlets is a web technology from Sun.
+	=> Servlets is a J2EE technology.
+	=> Servlets is a specification for web container manufacturers.
+	=> Servlet API is used by web application developers to develop interactive Java based web applications.
+	
+What is Servlet API?
+	=> A collection of library interfaces and classes whose methods are used to develop servlets and communicate with Servlet Engine is nothing but Servlet API.
+	=> Servlet API is distributed into two packages.
+		1. javax.servlet
+		2. javax.servlet.http
+		
+	=> Servlet Engine implements Servlet API. (Which is similar to JDBC driver implementing JDBC API)
+	
+What is a Servlet?
+
+	=> A Servlet is a container manager public java class that extends the functionality of a WebServer.
+	=> A Servlet is a dynamic web resource of a Java based web application.
+	=> A Servlet is a web component.
+	=> A Servlet is a web server side piece of Java Code that runs within the process space of Web Server(Web container)
+	=> A Servlet source code contains Java code and HTML Code embedded into Servlet API methods as text
+	
+What is the life cycle of a Servlet?
+	=> Any public Java class is eligible to act as a servlet class if and only if it implements the javax.servlet.Servlet interface.
+	=> Servlet interface has 5 methods.
+	
+		1. init()
+		2. destroy()
+		3. service(ServletRequest req,ServletResponse resp)
+		4. getServletConfig()
+		5. getServletInfo()
+		
+	=> Servlet Engine controls the life cycle of the Servlet.
+	=> Servlet lifecycle is described by 4 phases and 3 life cycle methods.
+		1. Instantiation phase	: Load the Servlet class
+		2. Initialization phase	: Call the init()
+		3. Servicing phase		: Call the service()
+		4. Destruction phase.	: Call the destroy()
+			
+	=> int,service and destroy methods are life cycle methods.
+	
+Develop a web application in which a servlet displays a "Hello Web World" message on the Server console.
+
+	=> Java based web application development involves the following steps.
+		1. Creating a structured hierarchy of directories
+		2. Developing all the web resources of the application
+		3. Developing deployment descriptor
+		4. Configuring the application files.
+		
+		1. Creating a structured hierarchy of directories:
+		
+			helloworldwebapplication
+			|
+			|
+			---->WEB-INF
+				|
+				|
+				--->classes
+				|
+				|
+				--->lib
+				
+		2. Developing all the web resources of the application:
+			
+			import javax.servlet.*;
+			
+			public class HelloWorldServlet implements Servlet{
+			
+				public void init(){
+				}
+				
+				public void service(ServletRequest req,ServletResponse resp){
+					System.out.println(":Hello Web World Application:");
+				}
+				
+				public void destroy(){
+				
+				}
+				
+				public String getServletInfo(){
+					return null;
+				}
+				
+				public ServletConfig getServletConfig(){
+					return null;
+				}
+			}
+			
+		3. Developing a deployment descriptor
+			=> web.xml is a text file known as deployment descriptor
+			=> In this we do many tasks, 
+				1. Servlet registration
+				2. mapping the client request to the servlet.
+				
+			web.xml:
+				<web-app>
+					<servlet>
+						<servlet-name>firstWeb</servlet-name>
+						<servlet-class>HelloWorldServlet</servlet-class>
+					</servlet>
+					<servlet-mapping>
+						<servlet-name>firstWeb</servlet-name>
+						<url-pattern>/hello</url-pattern>
+					</servlet-mapping>
+				</web-app>
+				
+		4. Configuring the application files:
+			=> We need to copy html documents, image files and jsps into the root directory.
+			=> Any jar files of the application to be placed in the lib directory.
+			=> Java class files to be copied into the classes directory.
+			=> web.xml has to be copied into WEB-INF.
+			
+			https://tomcat.apache.org/download-90.cgi
+			
+			http://www.java2s.com/example/jar/j/download-javaxservletapi400jar-file.html
+				
+		
+Develop a addition web application:
+		
+addition.html:
+			<html>
+			<body bgcolor="Yellow">
+				<center>
+					<h1>Addition Screen</h1>
+					<form action="./add">
+						Number 1: <input type="text" name="num1" /> <br>
+						Number 2: <input type="text" name="num2" /> <br>
+						<input type="submit" value="add">
+					</form>
+				</center>
+			</body>
+		</html>
+		
+AdditionServlet.java:
+	import java.io.IOException;
+	import java.io.PrintWriter;
+
+	import javax.servlet.GenericServlet;
+	import javax.servlet.ServletException;
+	import javax.servlet.ServletRequest;
+	import javax.servlet.ServletResponse;
+
+	public class AdditionServlet extends GenericServlet {
+
+		@Override
+		public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+			// TODO Auto-generated method stub
+			System.out.println(":AdditionServlet:=======================>:Start");
+			String number1=request.getParameter("num1");
+			String number2=request.getParameter("num2");
+			int n1=Integer.parseInt(number1);
+			int n2=Integer.parseInt(number2);
+			int sum=n1+n2;
+			
+			response.setContentType("text/html");
+			PrintWriter out=response.getWriter();
+			out.println("<html>");
+			out.println("<body bgcolor='blue'>");
+			out.println("<h1>Sum of two numbers is: "+sum+"</h1>");
+			out.println("</body>");
+			out.println("</html>");
+			out.close();
+			System.out.println(":AdditionServlet:=======================>:End");
+		}
+	}
+
+web.xml:
+	<web-app>
+		<servlet>
+			<servlet-name>firstweb</servlet-name>
+			<servlet-class>HelloWorldServlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>firstweb</servlet-name>
+			<url-pattern>/hello</url-pattern>
+		</servlet-mapping>
+	
+		<servlet>
+			<servlet-name>addition</servlet-name>
+			<servlet-class>AdditionServlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>addition</servlet-name>
+			<url-pattern>/add</url-pattern>
+		</servlet-mapping>
+	</web-app>
+	
+
+setContentType():
+	=> This method is called on the response object to specify the MIME type.
+	=> Some example of MIME types are:
+		"text/plain", "image/gif", "text/html"
+		
+
+Explain about PrintWriter out=response.getWriter():
+		=> java.io.PrintWriter is a character oriented stream class. "out" is the reference of the PrintWriter class object which refers to the browser stream.
+
+How are servlets classified?
+
+	=> Servlets are two types:
+		1) protocol independent
+		2) protocol dependent
+	
+	=> javax.servlet.GenericServlet is known as protocol independent Servlet.
+	=> javax.servlet.http.HttpServlet is known as protocol dependent Servlet.
+	=> In a java based web application, a user defined servlet should never inherit from GenericServlet.
+	=> Always user-defined servlet should inherit from HttpServlet.
+	
+								javax.servlet.Servlet
+										^
+										|
+										|
+							javax.servlet.GenericServlet
+										^
+										|
+										|
+							javax.servlet.http.HttpServlet
+										^
+										|
+										|
+								User Defined Servlet
+								
+Find the below general structure of a user defined servlet of any real time java based web application.
+
+	public class MyServlet extends HttpServlet{
+		public void init(ServletConfig config){
+			//resources allocation.
+		}
+		public void destroy(){
+			//resource releasing
+		}
+		public void doGet or doPost(HttpServletRequest request,HttpServletResponse response){
+			//client request processing.
+		}
+	}
+
+
+	
+*****************************************************************************************
+							JSP (Java Server Pages)
+*****************************************************************************************
+What are limitations of Servlets?
+	=> Dynamic content generation code and presentation code are tightly coupled. This is the main problem with servlets.
+	=> It leads to the following problems.
+		1. Code generation tools can't be used and therefore, RAD is not promoted.
+		2. Clear separation of roles is not possible. It leads to development and maintenance problems.
+
+	Note: JSP addresses the above problems.
+
+What is JSP?
+	=> JSP is a web technology
+	=> JSP is an API
+	=> JSP is a specification
+	=> JSP is a J2EE technology.
+	
+What is a jsp?
+	=> A jsp is a text file with .jsp extension. It is not a pure java program, but which contains both html and java code.
+	=> A jsp is a web component.
+	=> A jsp is a dynamic web resource.
+	=> A jsp is a server side piece of code that enhances the functionality of the webserver.
+	
+What are the duties of a jsp?
+	=> When a jsp is used as a replacement of a servlet, a jsp does the following.
+		1. receiving the client request and capturing the user input.
+		2. processing the data after communicating with the database.
+		3. producing the dynamic webpage and handing it over to the web server.
+		
+What is the usage of a jsp in a realtime Java based web application?
+	1. To produce the input pages.
+	2. To produce the response pages.
+	
+What are the functions of a Servlet in an industry standard web application?
+	=> 1. Receiving the client request.
+	=> 2. Capturing the user input.
+	=> 3. Calling the business method of a special Java class for data processing.
+	=> 4. Placing processed data in request scope or some other scope(session, application)
+	=> 5. Using RequestDispatching switching the control to an appropriate jsp.
+			RequestDispatcher rd = request.getRequestDispatcher("filename.jsp");
+			rd.forward(request,response);
+			
+Life cycle of a jsp?
+	=> A jsp lifecycle is described by three life cycle methods and 6 phases.
+	=> jsp life cycle methods are
+		1. jspInit()
+		2. jspDestroy()
+		3. _jspService(HttpServletRequest req,HttpServletResponse resp)
+		
+			Note: if any method starts with underscore("_"), then that method is the final method and it can't be overridden.
+		
+	=> Life cycle phases are 
+		1. Translation Phase
+		2. Compilation Phase
+		3. Instantiation Phase
+		4. Initialization Phase
+		5. Servicing Phase
+		6. Destruction Phase
+	
+	1. Translation Phase:
+		When a client request comes for a jsp, JSP Engine makes a full read of the jsp file and then performs the translation.
+		=> Unless the jsp source code is modified, translation happens only once in the lifetime of a jsp.
+		=> During the translation phase JSP Engine translates jsp file into .java file is nothing but the source code of Container Generated Servlet.
+		=> Conversion of jsp source code into Servlet source code is nothing but the translation phase of a jsp.
+	2. Compilation Phase:
+		=> JSP Engine compiles the Container Generated Servlet into .class file. JSP Engine uses the jasper compiler for this purpose.
+		
+	Note:
+		=> Instantiation, Initialization, Servicing and destruction phases are similar to user defined servlet even for container generated servlet.
+		=> During the initialization phase jspInit() method is called.
+		=> During servicing phase _jspService() method is called.
+		=> During the destruction phase jspDestroy() method is called.
+		
+Contents of a jsp:
+	=> Template text (html code)
+	=> JSP elements
+	=> Java code (directly/indirectly)
+	
+JSP Elements --------> Scripting elements
+				|			|
+				|			|--> declaration
+				|			|
+				|			|--> expression
+				|			|
+				|			|--> scriptlet
+				|
+				|
+				|---->	directives
+				|			|
+				|			|--> page directive
+				|			|
+				|			|--> include directive
+				|			|
+				|			|--> taglib directive
+				|			
+				|
+				|---->	actions
+				 			|--> Standard actions
+				 			|		|
+				 			|		|--> include
+				 			|		|--> forward
+				 			|		|--> param
+				 			|		|--> useBean
+				 			|		|--> setProperty
+				 			|		|--> getProperty
+				 			|
+				 			|--> Custom actions.
+			
+
+	
